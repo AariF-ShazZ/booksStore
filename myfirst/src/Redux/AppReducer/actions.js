@@ -1,5 +1,5 @@
 import * as types from  "./actionsTypes"
-
+import axios from "axios"
 const getBookRequest = () => {
     return {
         type:types.GET_BOOKS_REQUEST
@@ -17,9 +17,10 @@ const getBookError = () => {
     }
 }
 
-export const getBooks = () => (dispatch) => {
+export const getBooks = (params) => (dispatch) => {
+    console.log(params);
     dispatch(getBookRequest())
-    return axios.get("http://localhost:8000/books")
+    return axios.get("http://localhost:8000/books",params)
     .then((res) => dispatch(getBookSuccess(res.data)))
     .catch((err) => dispatch(getBookError()))
 }
