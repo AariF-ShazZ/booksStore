@@ -1,19 +1,21 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { login } from '../Redux/AuthReducer/actions'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const Login = () => {
   const [email, setEmail] =useState("")
   const [password, setPassword] =useState("")
   const dispatch = useDispatch()
   const navigate = useNavigate()
-
+  const location  = useLocation()
+  console.log("Location in Login => ",location);
+  const comingFrom = location.state?.data || "/"
   const handleSubmit = (e) => {
     e.preventDefault()
     if(email && password){
       dispatch(login({email,password})).then((res) =>{
-        navigate("/")
+        navigate(comingFrom,{replace:true})
       }).catch((err) =>  console.log("Login Fail"))
     }
   }

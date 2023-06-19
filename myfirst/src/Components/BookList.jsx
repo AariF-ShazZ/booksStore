@@ -87,9 +87,8 @@ const BookList = () => {
             {
                 products.length > 0 && products.map((ele) => {
                     return <BookCardWrapper key={ele.id}>
-                        <Link to={`/books/${ele.id}`}>
+                       
                         <BookCard bookData={ele} />
-                        </Link>
                     </BookCardWrapper>
                 })
             }
